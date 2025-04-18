@@ -1,0 +1,21 @@
+workflow: dynamic-api-pipeline
+steps:
+  - name: getUser
+    request:
+      url: "https://jsonplaceholder.typicode.com/users/{{ input.userId }}"
+      method: GET
+    parse:
+      email: "$.email"
+      name: "$.name"
+
+  - name: sendEmail
+    request:
+      url: "https://mock.email.api/send"
+      method: POST
+      headers:
+        Content-Type: "application/json"
+      body:
+        to: "{{ getUser.email }}"
+        subject: "Welcome, {{ getUser.name }}"
+        message: "Hello {{ getUser.name }}, welcome aboard!"
+
