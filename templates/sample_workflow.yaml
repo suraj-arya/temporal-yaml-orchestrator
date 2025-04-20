@@ -10,12 +10,9 @@ steps:
 
   - name: sendEmail
     request:
-      url: "https://mock.email.api/send"
-      method: POST
+      url: "https://jsonplaceholder.typicode.com/users"
+      method: GET
       headers:
         Content-Type: "application/json"
-      body:
-        to: "{{ getUser.email }}"
-        subject: "Welcome, {{ getUser.name }}"
-        message: "Hello {{ getUser.name }}, welcome aboard!"
-
+      params:
+        email: "{{ getUser.email }}"

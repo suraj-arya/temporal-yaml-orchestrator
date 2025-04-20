@@ -5,7 +5,6 @@ from activities.api_runner import run_api_step
 import asyncio
 
 async def main():
-    print(DynamicAPIWorkflow)
     from temporalio.client import Client
     client = await Client.connect("localhost:7233")
 
@@ -13,7 +12,7 @@ async def main():
         client,
         task_queue="yaml-workflows",
         workflows=[DynamicAPIWorkflow],
-        activities=[run_api_step],
+        activities=[run_api_step]
     )
 
     await worker.run()
